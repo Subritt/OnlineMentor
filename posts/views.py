@@ -3,6 +3,6 @@ from .models import Query
 
 def home(request):
     context = {
-        'posts': Query.objects.all()
+        'queries': Query.objects.all()
     }
     return render(request, 'posts/home.html', context)
