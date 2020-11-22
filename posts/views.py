@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from .models import Query
 
-def home(request):
-    context = {
-        'queries': Query.objects.all()
-    }
-    return render(request, 'posts/home.html', context)
+class PostListView(ListView):
+    model = Query
+    template_name = 'posts/home.html'
+    context_object_name = 'queries'
+    ordering = ['-date_posted']

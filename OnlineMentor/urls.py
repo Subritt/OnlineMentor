@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from posts.views import PostListView
 from posts import views as post_views
 from users import views as user_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', post_views.home, name='home-page'),
+    path('', PostListView.as_view(), name='home-page'),
     path('register/', user_view.register, name='register'),
     path('profile/', user_view.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
