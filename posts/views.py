@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     DetailView,
-    CreateView
+    CreateView,
+    UpdateView
 )
 from .models import Query
 
@@ -17,6 +18,14 @@ class PostDetailView(DetailView):
     model = Query
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Query
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Query
     fields = ['title', 'content']
 
