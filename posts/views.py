@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import (
     ListView,
-    DetailView
+    DetailView,
+    CreateView
 )
 from .models import Query
 
@@ -13,3 +14,7 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Query
+
+class PostCreateView(CreateView):
+    model = Query
+    fields = ['title', 'content']
