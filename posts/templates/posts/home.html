@@ -5,7 +5,7 @@
             <img src="{{ query.author.profile.image.url }}" alt="{{ query.author.username }}" class="rounded-circle article-img">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ query.author }}</a>
+                    <a class="mr-2" href="{% url 'user-posts' query.author.username %}">{{ query.author }}</a>
                     <small class="text-muted">{{ query.date_posted|date:'F d, Y' }}</small>
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' query.id %}">{{ query.title }}</a></h2>

@@ -22,7 +22,7 @@ class PostListView(ListView):
 
 class UserPostListView(ListView):
     model = Query
-    template_name = 'posts/home.html'
+    template_name = 'posts/user_posts.html'
     context_object_name = 'queries'
     paginate_by = 9
 
