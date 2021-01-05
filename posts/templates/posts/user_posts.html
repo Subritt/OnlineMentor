@@ -10,7 +10,7 @@
                     <small class="text-muted">{{ query.date_posted|date:'F d, Y' }}</small>
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' query.id %}">{{ query.title }}</a></h2>
-                <p class="article-content">{{ query.content }}</p>
+                <p class="article-content">{{ query.content | safe }}</p>
             </div>
         </article>
     {% endfor %}
