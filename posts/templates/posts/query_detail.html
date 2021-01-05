@@ -1,4 +1,5 @@
 {% extends "posts/base.html" %}
+{% load crispy_forms_tags %} <!-- Newly Added -->
 {% block content %}
     <article class="media content-section">
         <img src="{{ query.author.profile.image.url }}" alt="{{ object.author.username }}" class="rounded-circle article-img">
@@ -14,7 +15,41 @@
                 {% endif %}
             </div>
             <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
+            <p class="article-content">{{ object.content | safe }}</p>
         </div>
     </article>
+    <!-- Newly added -->
+    <div>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+            <button type="submit" class="save btn btn-default">Comment</button>
+        </form>
+    </div>
+    
+    <!-- <div class=" row post_spacing background_design1 ">
+        <hr>
+        {% for reply in replies %}
+            <div class=" col-md-12 comment">
+                <div class="date">{{ reply.date_posted|date:'F d, Y' }}</div>
+                <strong>{{ reply.author }}</strong>
+                <p>{{ reply.content|linebreaks }}</p>
+            </div>
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+    </div> -->
+    <div id="replies" class="mt-4">
+        {% for reply in replies %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <span>{{ reply.author }}</span>
+                        <small class="text-muted">{{ reply.date_posted|date:'F d, Y' }}</small>
+                    </div>
+                    <p class="article-content">{{ reply.content | safe}}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
 {% endblock content %}
